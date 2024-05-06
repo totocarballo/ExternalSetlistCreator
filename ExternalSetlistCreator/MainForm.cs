@@ -158,7 +158,10 @@ namespace ExternalSetlistCreator
 
             if (LstFiles.SelectedItem != null)
             {
-                LstFiles.Items.Remove(LstFiles.SelectedItem);
+                foreach (var item in LstFiles.SelectedItems.Cast<string>().Select(item => item).ToList())
+                {
+                    LstFiles.Items.Remove(item);
+                }
             }
 
             if (LstFiles.Items.Count > 0)
