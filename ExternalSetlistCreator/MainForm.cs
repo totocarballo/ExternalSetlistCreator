@@ -367,6 +367,8 @@ namespace ExternalSetlistCreator
                     return;
                 }
 
+                LstFiles.SelectedItems.Clear();
+
                 if (listText.Contains(searchText, StringComparison.OrdinalIgnoreCase))
                 {
                     LstFiles.SelectedIndex = i;
