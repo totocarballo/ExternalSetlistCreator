@@ -354,7 +354,7 @@ namespace ExternalSetlistCreator
         {
             if (string.IsNullOrWhiteSpace(searchText) || LstFiles.Items.Count == 0)
             {
-                LstFiles.ClearSelected();
+                //LstFiles.ClearSelected();
                 return;
             }
 
@@ -379,7 +379,7 @@ namespace ExternalSetlistCreator
             LstFiles.ClearSelected();
         }
 
-        private void ShowInputBox()
+        private bool ShowInputBox()
         {
             if (LstFiles.SelectedItem != null)
             {
@@ -394,19 +394,29 @@ namespace ExternalSetlistCreator
 
                 string? item = LstFiles.SelectedItem.ToString();
 
-                var pos = 0;
+                var pos = LstFiles.SelectedIndex + 1;
 
-                var result = InputBox.Show(item!, $"Select a position between 0 (Top) or {LstFiles.Items.Count - 1} (Bottom)", ref pos);
+                var result = InputBox.Show(item!, $"Select a position between 1 (Top) or {LstFiles.Items.Count} (Bottom)", ref pos);
 
                 if (result == DialogResult.OK)
                 {
-                    MoverItemToPosition(pos);
+                    MoverItemToPosition(pos - 1);
+                    return true;
                 }
             }
+            return false;
         }
         private void TxtSearch_Click(object sender, EventArgs e)
         {
             TxtSearch.SelectAll();
+        }
+
+        private void TxtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && ShowInputBox())
+            {
+                TxtSearch.Text = "";
+            }
         }
 
         private void TxtSearch_TextChanged(object sender, EventArgs e)

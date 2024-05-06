@@ -57,9 +57,10 @@
             TxtSearch.Name = "TxtSearch";
             TxtSearch.Size = new Size(302, 23);
             TxtSearch.TabIndex = 24;
-            TipMessage.SetToolTip(TxtSearch, "Enter text to search in the list.");
+            TipMessage.SetToolTip(TxtSearch, "Enter text to search in the list and press Enter to change its position.");
             TxtSearch.Click += TxtSearch_Click;
             TxtSearch.TextChanged += TxtSearch_TextChanged;
+            TxtSearch.KeyDown += TxtSearch_KeyDown;
             // 
             // ChkSortList
             // 
