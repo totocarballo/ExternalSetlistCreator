@@ -64,7 +64,11 @@ namespace ExternalSetlistCreator
                 byte[] hashBytes = Encoding.UTF8.GetBytes(hash);
                 fs.Write(hashBytes, 0, hashBytes.Length);
 
-                fs.WriteByte((byte)percentage);
+                foreach (var pByte in BitConverter.GetBytes(percentage))
+                {
+                    fs.WriteByte(pByte);
+                }
+
                 fs.WriteByte(0x00);
             }
         }
